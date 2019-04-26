@@ -24,7 +24,7 @@ namespace ArrayListsandStructures
             InitializeComponent();
         }
 
-        private ArrayList Grades = new ArrayList();
+        private ArrayList GradesList = new ArrayList();
 
         private Grade grade;
         private void Form1_Load(object sender, EventArgs e)
@@ -39,17 +39,32 @@ namespace ArrayListsandStructures
         {
             grade.MaxScore = maxScore;
             grade.LetterGrade = letterGrade;
-            Grades.Add(grade);
+            GradesList.Add(grade);
         }
         private void btnFindGrade_Click(object sender, EventArgs e)
         {
+            string letterGrade = string.Empty;
             if (!int.TryParse(txtScore.Text, out int score))
             {
                 MessageBox.Show("Enter a number dumbass!");
+                return;
             }
             else
             {
-                int entry = Convert.ToInt16(txtScore.Text);
+               int entry = Convert.ToInt16(txtScore.Text);
+               foreach (Grade grade in GradesList)
+                {
+                    if (entry <= grade.MaxScore)
+                    {
+                        letterGrade = grade.LetterGrade;
+                        MessageBox.Show("Grade is: " + letterGrade);
+                        return;
+                    }
+                    else
+                    {
+                        MessageBox.Show("that entry is not valid.");
+                    }
+                }
 
             }
 
